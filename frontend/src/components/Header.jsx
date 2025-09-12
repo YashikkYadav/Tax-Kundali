@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { HashLink } from 'react-router-hash-link';
+
 import { FiMenu, FiX, FiChevronDown } from "react-icons/fi";
 
 const Header = () => {
@@ -19,6 +21,7 @@ const Header = () => {
           <a href="/" className="hover:text-[#0089FF]">Home</a>
           <a href="/about" className="hover:text-[#0089FF]">About</a>
             <a href="/services" className="block hover:text-[#0089FF]">Services</a>
+             <HashLink smooth to="/#NewsAndBlogs" className="block hover:text-[#0089FF]">News and Blogs</HashLink>
 
           {/* Services Dropdown
           <div className="relative group">
@@ -75,7 +78,7 @@ const Header = () => {
           <a href="/" className="block hover:text-[#0089FF]">Home</a>
           <a href="/about" className="block hover:text-[#0089FF]">About</a>
           <a href="/services" className="block hover:text-[#0089FF]">Services</a>
-
+           <HashLink smooth to="/#NewsAndBlogs" className="block hover:text-[#0089FF]">News and Blogs</HashLink>
           {/* Services Dropdown in Mobile */}
           {/* <div>
             <button

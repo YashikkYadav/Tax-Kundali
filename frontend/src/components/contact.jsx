@@ -71,7 +71,7 @@ const Contact = () => {
         {/* Right Section with Image */}
         <div className="flex-1 order-1 md:order-2">
           <img
-            src="/contact.jpg"
+            src="/heroImg.jpg"
             alt="Contact"
             className="w-full h-[550px] object-cover rounded-t-3xl md:rounded-t-none md:rounded-r-3xl"
           />

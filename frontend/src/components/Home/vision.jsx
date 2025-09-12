@@ -82,10 +82,7 @@ const VisionMission = () => {
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 Our Plan Makes You Feel More Comfortable in Tax Management
               </h2>
-              <p className="text-gray-200 mb-6 max-w-xl">
-                Nulla semper condimentum tellus in ultricies. Nunc tempor ipsum
-                nec fermentum consequat. Cras et felis ultricies.
-              </p>
+            
             </div>
             <button className="px-6 py-3 bg-[#0089FF] text-white rounded-full hover:bg-[#006fd1] hover:shadow-lg hover:scale-105 transition duration-300">
               Contact Us

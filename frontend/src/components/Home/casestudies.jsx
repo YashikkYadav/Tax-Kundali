@@ -6,7 +6,7 @@ const CaseStudies = () => {
       category: "GST Case Study",
       title: "GST Compliance Rescue for a Retail Business",
       desc: "A growing retail company faced penalties due to irregular GST filings. We streamlined their return process, rectified past errors, and set up a monthly compliance system — saving them from ₹3.5 lakh in potential fines.",
-      image: "/case1.jpg",
+      image: "/case1.webp",
     },
     {
       category: "International Taxation Case Study",
@@ -43,7 +43,7 @@ const CaseStudies = () => {
           {cases.map((item, index) => (
             <div
               key={index}
-              className="relative rounded-2xl overflow-hidden shadow-md group h-72 flex items-end transform transition duration-300 hover:scale-105 hover:shadow-xl border border-white/20"
+              className="relative rounded-2xl overflow-hidden shadow-md group h-82 flex items-end transform transition duration-300 hover:scale-105 hover:shadow-xl border border-white/20"
               style={{
                 backgroundImage: `url(${item.image})`,
                 backgroundSize: "cover",
