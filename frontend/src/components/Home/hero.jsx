@@ -4,7 +4,7 @@ const Hero = () => {
   return (
     <section
       className="relative bg-cover bg-center rounded-3xl h-[90vh] flex items-center mt-4"
-      style={{ backgroundImage: "url('/heroim.jpg')" }}
+      style={{ backgroundImage: "url('/heroImg.jpg')" }}
     >
       {/* Overlay */}
       <div className="absolute"></div>

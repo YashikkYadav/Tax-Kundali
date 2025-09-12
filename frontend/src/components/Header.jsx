@@ -17,9 +17,10 @@ const Header = () => {
         {/* Desktop Nav */}
         <nav className="hidden md:flex space-x-8 text-gray-700 font-medium relative">
           <a href="/" className="hover:text-[#0089FF]">Home</a>
-          <a href="#" className="hover:text-[#0089FF]">About</a>
+          <a href="/about" className="hover:text-[#0089FF]">About</a>
+            <a href="/services" className="block hover:text-[#0089FF]">Services</a>
 
-          {/* Services Dropdown */}
+          {/* Services Dropdown
           <div className="relative group">
             <button className="hover:text-[#0089FF] flex items-center gap-1">
               Services <FiChevronDown className="text-sm group-hover:rotate-180 transition duration-300" />
@@ -31,7 +32,7 @@ const Header = () => {
                 <li><a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-[#0089FF]">Service 3</a></li>
               </ul>
             </div>
-          </div>
+          </div> */}
 
           {/* Pages Dropdown */}
           <div className="relative group">
@@ -72,10 +73,11 @@ const Header = () => {
       {mobileOpen && (
         <div className="md:hidden bg-white shadow-md px-6 py-4 space-y-4 text-gray-700 font-medium">
           <a href="/" className="block hover:text-[#0089FF]">Home</a>
-          <a href="#" className="block hover:text-[#0089FF]">About</a>
+          <a href="/about" className="block hover:text-[#0089FF]">About</a>
+          <a href="/services" className="block hover:text-[#0089FF]">Services</a>
 
           {/* Services Dropdown in Mobile */}
-          <div>
+          {/* <div>
             <button
               onClick={() => setServicesOpen(!servicesOpen)}
               className="flex items-center justify-between w-full hover:text-[#0089FF]"
@@ -89,7 +91,7 @@ const Header = () => {
                 <li><a href="#" className="block hover:text-[#0089FF]">Service 3</a></li>
               </ul>
             )}
-          </div>
+          </div> */}
 
           {/* Pages Dropdown in Mobile */}
           <div>
