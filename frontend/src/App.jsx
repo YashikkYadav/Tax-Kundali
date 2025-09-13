@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Contact from "./components/contact";
 import About from "./pages/About";
 import Services from "./pages/Services";
+import FloatingIcon from "./components/ui/floatingIcon";
 import "./App.css";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         {/* Add more routes later if needed */}
       </Routes>
       <Footer />
+      <FloatingIcon/>
     </Router>
   );
 }
