@@ -1,45 +1,62 @@
-import React from "react";
+import React, { useRef } from "react";
+import { motion } from "framer-motion";
+import useScrollAnimation from "../../hooks/useScrollAnimation";
+import useHoverAnimation from "../../hooks/useHoverAnimation";
+import { fadeInUp, fadeIn, scaleIn } from "../../lib/motionVariants";
+
 
 const Hero = () => {
+  const sectionRef = useRef(null);
+  const controls = useScrollAnimation(sectionRef);
+  const { controls: btn1Controls, onHoverStart: btn1HoverStart, onHoverEnd: btn1HoverEnd } = useHoverAnimation({ scale: 1.08 }, { scale: 1 });
+  const { controls: btn2Controls, onHoverStart: btn2HoverStart, onHoverEnd: btn2HoverEnd } = useHoverAnimation({ scale: 1.08 }, { scale: 1 });
+
   return (
-    <section
+    <motion.section
+      ref={sectionRef}
       className="relative bg-cover bg-center rounded-3xl h-[90vh] flex items-center mt-4"
-      style={{ backgroundImage: "url('/heroim.jpg')" }}
+      style={{ backgroundImage: "url('/vikash.jpg')" }}
+      initial="hidden"
+      animate={controls}
+      variants={fadeIn}
     >
       {/* Overlay */}
       <div className="absolute"></div>
 
       {/* Content */}
-      <div className="relative max-w-7xl px-6 text-white">
-        <div className="max-w-xl bg-black/60 p-8 rounded-lg">
-          <p className="text-sm uppercase tracking-widest mb-3">
+      <motion.div className="relative max-w-7xl px-6 text-white" variants={fadeInUp}>
+        <motion.div className="max-w-xl bg-black/60 p-8 rounded-lg" variants={scaleIn}>
+          <motion.p className="text-sm uppercase tracking-widest mb-3" variants={fadeInUp}>
             We Are Tax Advisor
-          </p>
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
+          </motion.p>
+          <motion.h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4" variants={fadeInUp}>
             Innovative Strategies <br /> for Tax Prosperity
-          </h1>
-          <p className="mb-6 text-gray-200">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-            tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
-          </p>
+          </motion.h1>
 
           {/* Buttons */}
           <div className="flex space-x-4">
-            <button
+            <motion.button
               className="px-6 py-3 bg-gradient-to-r from-[#0089FF] to-[#005FCC] rounded-full transition"
-          
-              onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#0f2c4f")}
-              onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#173f73")}
+              onMouseOver={btn1HoverStart}
+              onMouseOut={btn1HoverEnd}
+              animate={btn1Controls}
+              whileTap={{ scale: 0.96 }}
             >
               Get Started
-            </button>
-            <button className="px-6 py-3 border border-white rounded-full hover:bg-white hover:text-black transition">
+            </motion.button>
+            <motion.button
+              className="px-6 py-3 border border-white rounded-full hover:bg-white hover:text-black transition"
+              onMouseOver={btn2HoverStart}
+              onMouseOut={btn2HoverEnd}
+              animate={btn2Controls}
+              whileTap={{ scale: 0.96 }}
+            >
               Learn More
-            </button>
+            </motion.button>
           </div>
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 };
 

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { fadeInLeft, fadeInUp, scaleIn, staggerContainer } from "../../lib/motionVariants";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -46,23 +48,39 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto my-10 bg-[#f8faff] p-6 md:p-10 rounded-2xl shadow-lg flex flex-col md:flex-row gap-8">
-      
+    <motion.div
+      className="max-w-7xl mx-auto my-10 bg-[#f8faff] p-6 md:p-10 rounded-2xl shadow-lg flex flex-col md:flex-row gap-8"
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
       {/* Left Side - Image */}
-      <div className="md:w-1/2">
-        <img
+      <motion.div className="md:w-1/2" variants={fadeInLeft}>
+        <motion.img
           src="/sample.jpg"
           alt="Contact Illustration"
           className="w-full h-full object-cover rounded-2xl"
+          whileHover={{ scale: 1.04 }}
+          transition={{ duration: 0.5 }}
         />
-      </div>
+      </motion.div>
 
       {/* Right Side - Form */}
-      <div className="md:w-1/2">
-        <h2 className="text-3xl font-bold mb-6 text-[#0089FF]">Send a Message</h2>
-        <form onSubmit={handleSubmit} className="space-y-5">
+      <motion.div className="md:w-1/2" variants={fadeInUp}>
+        <motion.h2 className="text-3xl font-bold mb-6 text-[#0089FF]" variants={fadeInUp}>
+          Send a Message
+        </motion.h2>
+        <motion.form
+          onSubmit={handleSubmit}
+          className="space-y-5"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {/* Name */}
-          <div>
+          <motion.div variants={fadeInUp}>
             <input
               type="text"
               name="name"
@@ -72,11 +90,11 @@ const ContactForm = () => {
               className="w-full p-3 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0089FF]"
             />
             {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
-          </div>
+          </motion.div>
 
           {/* Phone + Email */}
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="flex-1">
+          <motion.div className="flex flex-col md:flex-row gap-4" variants={staggerContainer}>
+            <motion.div className="flex-1" variants={fadeInUp}>
               <input
                 type="text"
                 name="phone"
@@ -86,9 +104,9 @@ const ContactForm = () => {
                 className="w-full p-3 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0089FF]"
               />
               {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
-            </div>
+            </motion.div>
 
-            <div className="flex-1">
+            <motion.div className="flex-1" variants={fadeInUp}>
               <input
                 type="email"
                 name="email"
@@ -98,11 +116,11 @@ const ContactForm = () => {
                 className="w-full p-3 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0089FF]"
               />
               {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Subject */}
-          <div>
+          <motion.div variants={fadeInUp}>
             <input
               type="text"
               name="subject"
@@ -112,10 +130,10 @@ const ContactForm = () => {
               className="w-full p-3 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0089FF]"
             />
             {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
-          </div>
+          </motion.div>
 
           {/* Message */}
-          <div>
+          <motion.div variants={fadeInUp}>
             <textarea
               name="message"
               placeholder="Your Message"
@@ -125,18 +143,21 @@ const ContactForm = () => {
               className="w-full p-3 bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0089FF]"
             ></textarea>
             {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
-          </div>
+          </motion.div>
 
           {/* Submit Button */}
-          <button
+          <motion.button
             type="submit"
             className="w-full bg-gradient-to-r from-[#0089FF] to-[#005FCC] text-white p-3 rounded-full hover:shadow-lg hover:scale-[1.02] transition-transform duration-300"
+            variants={scaleIn}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
           >
             Submit Form
-          </button>
-        </form>
-      </div>
-    </div>
+          </motion.button>
+        </motion.form>
+      </motion.div>
+    </motion.div>
   );
 };
 
