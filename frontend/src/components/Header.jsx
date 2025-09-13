@@ -1,131 +1,107 @@
-import React, { useState } from "react";
-import { HashLink } from 'react-router-hash-link';
 
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX, FiChevronDown } from "react-icons/fi";
+
+const headerVariants = {
+  hidden: { opacity: 0, y: -40 },
+  show: { opacity: 1, y: 0, transition: { duration: 1.1, ease: [0.23, 1, 0.32, 1] } },
+};
+const navStagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.18 } },
+};
+const navItem = {
+  hidden: { opacity: 0, y: -20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.9 } },
+};
+const mobileMenuVariants = {
+  hidden: { opacity: 0, y: -30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.9, staggerChildren: 0.15 } },
+  exit: { opacity: 0, y: -30, transition: { duration: 0.5 } },
+};
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const [pagesOpen, setPagesOpen] = useState(false);
 
   return (
-    <header className="w-full shadow-sm bg-white relative">
+    <motion.header
+      className="w-full shadow-sm bg-white relative"
+      variants={headerVariants}
+      initial="hidden"
+      animate="show"
+    >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-2">
         {/* Logo */}
-        <div className="flex items-center space-x-2">
+        <motion.div className="flex items-center space-x-2" variants={navItem}>
           <img src="/logo.png" className="h-17 w-17" alt="Logo" />
-        </div>
+        </motion.div>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex space-x-8 text-gray-700 font-medium relative">
-          <a href="/" className="hover:text-[#0089FF]">Home</a>
-          <a href="/about" className="hover:text-[#0089FF]">About</a>
-            <a href="/services" className="block hover:text-[#0089FF]">Services</a>
-             <HashLink smooth to="/#NewsAndBlogs" className="block hover:text-[#0089FF]">News and Blogs</HashLink>
-
-          {/* Services Dropdown
-          <div className="relative group">
-            <button className="hover:text-[#0089FF] flex items-center gap-1">
-              Services <FiChevronDown className="text-sm group-hover:rotate-180 transition duration-300" />
-            </button>
-            <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300 z-20">
-              <ul className="py-2">
-                <li><a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-[#0089FF]">Service 1</a></li>
-                <li><a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-[#0089FF]">Service 2</a></li>
-                <li><a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-[#0089FF]">Service 3</a></li>
-              </ul>
-            </div>
-          </div> */}
-
-          {/* Pages Dropdown */}
-          <div className="relative group">
-            <button className="hover:text-[#0089FF] flex items-center gap-1">
-              Pages <FiChevronDown className="text-sm group-hover:rotate-180 transition duration-300" />
-            </button>
-            <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300 z-20">
-              <ul className="py-2">
-                <li><a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-[#0089FF]">Page 1</a></li>
-                <li><a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-[#0089FF]">Page 2</a></li>
-                <li><a href="#" className="block px-4 py-2 hover:bg-blue-50 hover:text-[#0089FF]">Page 3</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <a href="/contact" className="hover:text-[#0089FF]">Contact</a>
-        </nav>
+        <motion.nav
+          className="hidden  md:flex space-x-8 text-gray-700 font-medium relative"
+          variants={navStagger}
+          initial="hidden"
+          animate="show"
+        >
+          <motion.div variants={navItem}>
+            <a href="/" className="hover:text-[#0089FF] transition">Home</a>
+          </motion.div>
+          <motion.div variants={navItem}>
+            <a href="/about" className="hover:text-[#0089FF] transition">About</a>
+          </motion.div>
+          <motion.div variants={navItem}>
+            <a href="/services" className="block hover:text-[#0089FF] transition">Services</a>
+          </motion.div>
+          <motion.div variants={navItem}>
+            <a href="/contact" className="hover:text-[#0089FF] transition">Contact</a>
+          </motion.div>
+        </motion.nav>
 
         {/* Contact Button (Desktop) */}
-        <div className="hidden md:block">
+        <motion.div className="hidden md:block invisible" variants={navItem}>
           <a
             href="#"
             className="px-5 py-2 bg-gradient-to-r from-[#0089FF] to-[#005FCC] text-white rounded-full hover:bg-blue-700 transition"
           >
             Contact Us
           </a>
-        </div>
+        </motion.div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden">
+        <motion.div className="md:hidden" variants={navItem}>
           <button onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <FiX size={24} /> : <FiMenu size={24} />}
           </button>
-        </div>
+        </motion.div>
       </div>
 
       {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="md:hidden bg-white shadow-md px-6 py-4 space-y-4 text-gray-700 font-medium">
-          <a href="/" className="block hover:text-[#0089FF]">Home</a>
-          <a href="/about" className="block hover:text-[#0089FF]">About</a>
-          <a href="/services" className="block hover:text-[#0089FF]">Services</a>
-           <HashLink smooth to="/#NewsAndBlogs" className="block hover:text-[#0089FF]">News and Blogs</HashLink>
-          {/* Services Dropdown in Mobile */}
-          {/* <div>
-            <button
-              onClick={() => setServicesOpen(!servicesOpen)}
-              className="flex items-center justify-between w-full hover:text-[#0089FF]"
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            className="md:hidden bg-white shadow-md px-6 py-4 space-y-4 text-gray-700 font-medium"
+            variants={mobileMenuVariants}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+          >
+            <a href="/" className="block hover:text-[#0089FF]">Home</a>
+            <a href="/about" className="block hover:text-[#0089FF]">About</a>
+            <a href="/services" className="block hover:text-[#0089FF]">Services</a>
+            <a href="/contact" className="block hover:text-[#0089FF]">Contact</a>
+            {/* <a
+              href="#"
+              className="block px-5 py-2 bg-gradient-to-r from-[#0089FF] to-[#005FCC] text-white rounded-full 
+                hover:bg-[#0089FF]/80 transition text-center 
+                backdrop-blur-xl border border-white/20 shadow-lg"
             >
-              Services <FiChevronDown className={`transition ${servicesOpen ? "rotate-180" : ""}`} />
-            </button>
-            {servicesOpen && (
-              <ul className="pl-4 mt-2 space-y-1">
-                <li><a href="#" className="block hover:text-[#0089FF]">Service 1</a></li>
-                <li><a href="#" className="block hover:text-[#0089FF]">Service 2</a></li>
-                <li><a href="#" className="block hover:text-[#0089FF]">Service 3</a></li>
-              </ul>
-            )}
-          </div> */}
-
-          {/* Pages Dropdown in Mobile */}
-          <div>
-            <button
-              onClick={() => setPagesOpen(!pagesOpen)}
-              className="flex items-center justify-between w-full hover:text-[#0089FF]"
-            >
-              Pages <FiChevronDown className={`transition ${pagesOpen ? "rotate-180" : ""}`} />
-            </button>
-            {pagesOpen && (
-              <ul className="pl-4 mt-2 space-y-1">
-                <li><a href="#" className="block hover:text-[#0089FF]">Page 1</a></li>
-                <li><a href="#" className="block hover:text-[#0089FF]">Page 2</a></li>
-                <li><a href="#" className="block hover:text-[#0089FF]">Page 3</a></li>
-              </ul>
-            )}
-          </div>
-
-          <a href="/contact" className="block hover:text-[#0089FF]">Contact</a>
-          <a
-  href="#"
-  className="block px-5 py-2 bg-gradient-to-r from-[#0089FF] to-[#005FCC] text-white rounded-full 
-             hover:bg-[#0089FF]/80 transition text-center 
-             backdrop-blur-xl border border-white/20 shadow-lg"
->
-  Contact Us
-</a>
-
-        </div>
-      )}
-    </header>
+              Contact Us
+            </a> */}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 };
 

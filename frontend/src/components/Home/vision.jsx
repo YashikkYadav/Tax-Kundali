@@ -1,13 +1,28 @@
 import { FaCheckCircle } from "react-icons/fa";
+import React, { useRef } from "react";
+import { motion } from "framer-motion";
+import useScrollAnimation from "../../hooks/useScrollAnimation";
+import useHoverAnimation from "../../hooks/useHoverAnimation";
+import { fadeInUp, fadeInLeft, scaleIn, fadeIn } from "../../lib/motionVariants";
 
 const VisionMission = () => {
+  const sectionRef = useRef(null);
+  const controls = useScrollAnimation(sectionRef);
+  const { controls: btnControls, onHoverStart, onHoverEnd } = useHoverAnimation({ scale: 1.08 }, { scale: 1 });
+
   return (
-    <section className="py-16 bg-white">
+    <motion.section
+      ref={sectionRef}
+      className="py-16 bg-white"
+      initial="hidden"
+      animate={controls}
+      variants={fadeIn}
+    >
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 px-6">
         {/* Left Side - Vision, Mission, History */}
-        <div className="flex flex-col gap-6">
+        <motion.div className="flex flex-col gap-6" variants={fadeInLeft}>
           {/* Vision */}
-          <div className="p-6 bg-blue-50 rounded-2xl shadow-md border border-transparent hover:border-[#0089FF] hover:scale-105 transition duration-300 hover:shadow-xl">
+          <motion.div className="p-6 bg-blue-50 rounded-2xl shadow-md border border-transparent" whileHover={{ scale: 1.05, boxShadow: "0 8px 32px rgba(0,0,0,0.2)" }} transition={{ duration: 0.3 }}>
             <h3 className="inline-block bg-white  font-bold text-lg px-4 py-2 rounded-xl mb-4 shadow-sm">
               Our Vision
             </h3>
@@ -29,10 +44,10 @@ const VisionMission = () => {
                 To build long-term, trust-based relationships through integrity.
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* Mission */}
-          <div className="p-6 bg-blue-50 rounded-2xl shadow-md border border-transparent hover:border-[#0089FF] hover:scale-105 transition duration-300 hover:shadow-xl">
+          <motion.div className="p-6 bg-blue-50 rounded-2xl shadow-md border border-transparent" whileHover={{ scale: 1.05, boxShadow: "0 8px 32px rgba(0,0,0,0.2)" }} transition={{ duration: 0.3 }}>
             <h3 className="inline-block bg-white  font-bold text-lg px-4 py-2 rounded-xl mb-4 shadow-sm">
               Our Mission
             </h3>
@@ -54,10 +69,10 @@ const VisionMission = () => {
                 Help businesses make informed, profitable decisions through advisory and insights.
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* History */}
-          <div className="p-6 bg-[#173f73] text-white rounded-2xl shadow-md hover:scale-105 hover:shadow-xl transition duration-300">
+          <motion.div className="p-6 bg-[#173f73] text-white rounded-2xl shadow-md" whileHover={{ scale: 1.05, boxShadow: "0 8px 32px rgba(0,0,0,0.2)" }} transition={{ duration: 0.3 }}>
             <h3 className="inline-block bg-white text-black font-bold text-lg px-4 py-2 rounded-xl mb-4 shadow-sm">
               Our History
             </h3>
@@ -67,11 +82,11 @@ const VisionMission = () => {
               simplifying complex financial matters and building lasting
               relationships.
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Right Side - Image with overlay */}
-        <div className="relative rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition duration-300">
+        <motion.div className="relative rounded-2xl overflow-hidden shadow-lg" variants={fadeInUp} whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
           <img
             src="/heroim.jpg"
             alt="About background"
@@ -82,15 +97,22 @@ const VisionMission = () => {
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 Our Plan Makes You Feel More Comfortable in Tax Management
               </h2>
-            
             </div>
-            <button className="px-6 py-3 bg-[#0089FF] text-white rounded-full hover:bg-[#006fd1] hover:shadow-lg hover:scale-105 transition duration-300">
+            <motion.button
+              className="px-6 py-3 bg-[#0089FF] text-white rounded-full"
+              onMouseOver={onHoverStart}
+              onMouseOut={onHoverEnd}
+              animate={btnControls}
+              whileTap={{ scale: 0.96 }}
+              whileHover={{ scale: 1.08 }}
+              transition={{ duration: 0.3 }}
+            >
               Contact Us
-            </button>
+            </motion.button>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   FaBook,
   FaMoneyCheckAlt,
@@ -9,8 +9,15 @@ import {
   FaUsersCog,
   FaUserTie,
 } from "react-icons/fa";
+import { motion } from "framer-motion";
+import useScrollAnimation from "../../hooks/useScrollAnimation";
+import useHoverAnimation from "../../hooks/useHoverAnimation";
+import { fadeInUp, fadeInLeft, scaleIn, fadeIn, staggerContainer } from "../../lib/motionVariants";
 
 const Services = () => {
+  const sectionRef = useRef(null);
+  const controls = useScrollAnimation(sectionRef);
+  const { controls: btnControls, onHoverStart, onHoverEnd } = useHoverAnimation({ scale: 1.08 }, { scale: 1 });
   const services = [
     {
       icon: <FaBook className="text-4xl text-[#0089FF]" />,
@@ -55,38 +62,53 @@ const Services = () => {
   ];
 
   return (
-    <section className="py-16 bg-white">
+    <motion.section
+      ref={sectionRef}
+      className="py-16 bg-white"
+      initial="hidden"
+      animate={controls}
+      variants={fadeIn}
+    >
       <div className="max-w-7xl mx-auto px-6">
         {/* Heading */}
-        <div className="flex justify-between items-center flex-wrap mb-12">
+        <motion.div className="flex justify-between items-center flex-wrap mb-12" variants={fadeInUp}>
           <div>
-            <p className="uppercase text-[#0089FF] font-semibold mb-2">
+            <motion.p className="uppercase text-[#0089FF] font-semibold mb-2" variants={fadeInUp}>
               What We Offer
-            </p>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4 leading-snug">
+            </motion.p>
+            <motion.h2 className="text-4xl font-bold text-gray-900 mb-4 leading-snug" variants={fadeInUp}>
               Innovative Strategies for Tax Prosperity
-            </h2>
-            <p className="text-gray-600 max-w-xl">
+            </motion.h2>
+            <motion.p className="text-gray-600 max-w-xl" variants={fadeInUp}>
               We provide a wide range of accounting, tax, and financial
               management services to help individuals and businesses achieve
               financial clarity and growth.
-            </p>
+            </motion.p>
           </div>
 
           {/* Glassmorphism Button */}
-          <button className="px-6 py-3 bg-gradient-to-r from-[#0089FF] to-[#005FCC] text-white rounded-full">
+          <motion.button
+            className="px-6 py-3 bg-gradient-to-r from-[#0089FF] to-[#005FCC] text-white rounded-full"
+            onMouseOver={onHoverStart}
+            onMouseOut={onHoverEnd}
+            animate={btnControls}
+            whileTap={{ scale: 0.96 }}
+            whileHover={{ scale: 1.08 }}
+            transition={{ duration: 0.3 }}
+          >
             View Services
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" variants={staggerContainer}>
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
-              className="bg-white rounded-2xl shadow-md p-8 text-center border border-transparent 
-                         hover:border-[#0089FF] hover:shadow-xl hover:scale-105 
-                         transition duration-300 ease-in-out"
+              className="bg-white rounded-2xl shadow-md p-8 text-center border border-transparent"
+              variants={scaleIn}
+              whileHover={{ scale: 1.05, boxShadow: "0 8px 32px rgba(0,0,0,0.2)" }}
+              transition={{ duration: 0.3 }}
             >
               <div className="flex justify-center mb-6">
                 <div className="bg-blue-100 rounded-full  p-6">{service.icon}</div>
@@ -102,11 +124,11 @@ const Services = () => {
                 <span>Learn More</span>
                 <span>→</span>
               </a>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

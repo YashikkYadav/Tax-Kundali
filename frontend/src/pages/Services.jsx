@@ -9,8 +9,9 @@ import {
   FaUsersCog,
   FaUserTie,
 } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { fadeIn, fadeInUp, staggerContainer } from "../lib/motionVariants";
 
-const Services = () => {
   const services = [
     {
       icon: <FaBook />,
@@ -53,32 +54,54 @@ const Services = () => {
       desc: "Professional CFO services to manage your finances without full-time costs.",
     },
   ];
-
-  return (
-    <section className="py-16 bg-white">
+const Services = () => (
+    <motion.section
+      className="py-16 bg-white"
+      variants={fadeIn}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
       <div className="max-w-7xl mx-auto px-6">
         {/* New Heading Structure */}
-        <div className="flex flex-col items-center text-center mb-14">
-          <p className="uppercase text-[#0089FF] font-semibold mb-2 tracking-wider">
+        <motion.div
+          className="flex flex-col items-center text-center mb-14"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <motion.p className="uppercase text-[#0089FF] font-semibold mb-2 tracking-wider" variants={fadeInUp}>
             What We Offer
-          </p>
-          <h2 className="text-4xl font-bold text-gray-900 mb-4 leading-snug">
+          </motion.p>
+          <motion.h2 className="text-4xl font-bold text-gray-900 mb-4 leading-snug" variants={fadeInUp}>
             Innovative Strategies for Tax Prosperity
-          </h2>
-          <p className="text-gray-600 max-w-2xl mb-8">
+          </motion.h2>
+          <motion.p className="text-gray-600 max-w-2xl mb-8" variants={fadeInUp}>
             We provide a wide range of accounting, tax, and financial
             management services to help individuals and businesses achieve
             financial clarity and growth.
-          </p>
-          <button className="px-8 py-4 bg-gradient-to-r from-[#0089FF] to-[#005FCC] text-white rounded-full text-lg font-semibold shadow hover:scale-105 transition mb-2">
+          </motion.p>
+          <motion.button
+            className="px-8 py-4 bg-gradient-to-r from-[#0089FF] to-[#005FCC] text-white rounded-full text-lg font-semibold shadow hover:scale-105 transition mb-2"
+            variants={fadeInUp}
+            whileHover={{ scale: 1.08 }}
+            transition={{ duration: 0.3 }}
+          >
             View All Services
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-10"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
               className={`
                 group relative rounded-2xl shadow-lg transition-all duration-300
@@ -90,6 +113,7 @@ const Services = () => {
               style={{
                 boxShadow: "0 4px 16px 0 rgba(0,0,0,0.07)",
               }}
+              variants={fadeInUp}
             >
               <div className="flex items-center mb-5">
                 <div
@@ -118,12 +142,12 @@ const Services = () => {
               >
                 {service.desc}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
-};
+//
 
 export default Services;
