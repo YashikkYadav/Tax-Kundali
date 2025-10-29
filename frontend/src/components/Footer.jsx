@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -13,7 +12,15 @@ import {
 
 const footerVariants = {
   hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 1.1, ease: [0.23, 1, 0.32, 1], staggerChildren: 0.22 } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1.1,
+      ease: [0.23, 1, 0.32, 1],
+      staggerChildren: 0.22,
+    },
+  },
 };
 const sectionStagger = {
   hidden: {},
@@ -50,11 +57,15 @@ export default function Footer() {
         {/* Logo & About */}
         <motion.div variants={sectionItem}>
           <div className="mb-5">
-            <img src="/logo.png" alt="Tax Kundali Logo" className="h-20 w-20" />
+            <img
+              src="/ca.png"
+              alt="ca vikash caini Logo"
+              className="w-[150px]"
+            />
           </div>
           <p className="text-gray-600 leading-relaxed mb-6 text-sm">
-            Empowering individuals and businesses with smart financial
-            solutions and expert tax guidance.
+            Empowering individuals and businesses with smart financial solutions
+            and expert tax guidance.
           </p>
           <motion.div className="flex space-x-3" variants={sectionStagger}>
             {[
@@ -89,12 +100,16 @@ export default function Footer() {
 
         {/* Address & Contact */}
         <motion.div variants={sectionItem}>
-          <h3 className="font-semibold text-lg mb-4 text-gray-800">Head Office</h3>
+          <h3 className="font-semibold text-lg mb-4 text-gray-800">
+            Head Office
+          </h3>
           <p className="text-gray-600 text-sm leading-relaxed">
             Vatsalaya Homeland, Plot no. 18, <br />
             Jaisinghpura, Bhankrota, Jaipur, 302026
           </p>
-          <h3 className="font-semibold text-lg mt-6 mb-3 text-gray-800">Contact</h3>
+          <h3 className="font-semibold text-lg mt-6 mb-3 text-gray-800">
+            Contact
+          </h3>
           <p className="text-gray-700 flex items-center gap-2 text-sm hover:text-[#0089FF] transition">
             <FaPhoneAlt className="text-[#0089FF]" /> 9828107380
           </p>
@@ -118,7 +133,7 @@ export default function Footer() {
                 key={idx}
                 className="text-gray-600 hover:text-[#0089FF] transition cursor-pointer"
                 variants={iconItem}
-                whileHover={{ scale: 1.08, color: '#0089FF' }}
+                whileHover={{ scale: 1.08, color: "#0089FF" }}
               >
                 {service}
               </motion.li>
@@ -127,29 +142,31 @@ export default function Footer() {
         </motion.div>
 
         {/* Quick Links */}
-<motion.div variants={sectionItem}>
-  <h3 className="font-semibold text-lg mb-4 text-gray-800">Quick Links</h3>
-  <ul className="space-y-2 text-sm">
-    {[
-      { label: "About", to: "/about" },
-      { label: "Contact", to: "/contact" },
-      { label: "Services", to: "/services" },
-    ].map((link, idx) => (
-      <motion.li
-        key={idx}
-        variants={iconItem}
-        whileHover={{ scale: 1.08, color: "#0089FF" }}
-      >
-        <Link
-          to={link.to}
-          className="text-gray-600 hover:text-[#0089FF] transition"
-        >
-          {link.label}
-        </Link>
-      </motion.li>
-    ))}
-  </ul>
-</motion.div>
+        <motion.div variants={sectionItem}>
+          <h3 className="font-semibold text-lg mb-4 text-gray-800">
+            Quick Links
+          </h3>
+          <ul className="space-y-2 text-sm">
+            {[
+              { label: "About", to: "/about" },
+              { label: "Contact", to: "/contact" },
+              { label: "Services", to: "/services" },
+            ].map((link, idx) => (
+              <motion.li
+                key={idx}
+                variants={iconItem}
+                whileHover={{ scale: 1.08, color: "#0089FF" }}
+              >
+                <Link
+                  to={link.to}
+                  className="text-gray-600 hover:text-[#0089FF] transition"
+                >
+                  {link.label}
+                </Link>
+              </motion.li>
+            ))}
+          </ul>
+        </motion.div>
       </motion.div>
 
       {/* Bottom Footer */}
@@ -162,11 +179,17 @@ export default function Footer() {
       >
         <p>
           © 2024 All Rights Reserved{" "}
-          <span className="text-gray-800 font-semibold">Tax Kundali</span>
+          <span className="text-gray-800 font-semibold">CA Vikash Saini</span>
         </p>
         <p>
           Designed by{" "}
-          <span className="text-[#0089FF] font-semibold">Tax Kundali</span>
+          <a
+            href="https://yashikyadavandco.com/"
+            target="_blank"
+            className="text-[#0089FF] font-semibold"
+          >
+            Yashik Yadav and Co.
+          </a>
         </p>
       </motion.div>
     </motion.footer>

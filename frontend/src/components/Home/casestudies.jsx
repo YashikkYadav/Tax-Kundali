@@ -1,7 +1,12 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import useScrollAnimation from "../../hooks/useScrollAnimation";
-import { fadeInUp, scaleIn, fadeIn, staggerContainer } from "../../lib/motionVariants";
+import {
+  fadeInUp,
+  scaleIn,
+  fadeIn,
+  staggerContainer,
+} from "../../lib/motionVariants";
 
 const CaseStudies = () => {
   const sectionRef = useRef(null);
@@ -31,12 +36,21 @@ const CaseStudies = () => {
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Heading */}
-        <motion.div className="flex justify-between items-center flex-wrap mb-12" variants={fadeInUp}>
+        <motion.div
+          className="flex justify-between items-center flex-wrap mb-12"
+          variants={fadeInUp}
+        >
           <div>
-            <motion.p className="uppercase text-[#0089FF] font-semibold mb-2" variants={fadeInUp}>
+            <motion.p
+              className="uppercase text-[#0089FF] font-semibold mb-2"
+              variants={fadeInUp}
+            >
               Case Studies
             </motion.p>
-            <motion.h2 className="text-4xl font-bold text-gray-900 mb-4 leading-snug" variants={fadeInUp}>
+            <motion.h2
+              className="text-4xl font-bold text-gray-900 mb-4 leading-snug"
+              variants={fadeInUp}
+            >
               Navigating Taxes, Shaping Success
             </motion.h2>
             <motion.p className="text-gray-600 max-w-xl" variants={fadeInUp}>
@@ -44,13 +58,16 @@ const CaseStudies = () => {
               overcome tax and compliance challenges successfully.
             </motion.p>
           </div>
-          <motion.button className="px-6 py-3 bg-gradient-to-r from-[#0089FF] to-[#005FCC] text-white rounded-full hover:bg-blue-700 transition mt-6 md:mt-0" whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.96 }}>
+          {/* <motion.button className="px-6 py-3 bg-gradient-to-r from-[#0089FF] to-[#005FCC] text-white rounded-full hover:bg-blue-700 transition mt-6 md:mt-0" whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.96 }}>
             View All Cases
-          </motion.button>
+          </motion.button> */}
         </motion.div>
 
         {/* Case Studies Grid */}
-        <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8" variants={staggerContainer}>
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          variants={staggerContainer}
+        >
           {cases.map((item, index) => (
             <motion.div
               key={index}
@@ -61,7 +78,10 @@ const CaseStudies = () => {
                 backgroundPosition: "center",
               }}
               variants={scaleIn}
-              whileHover={{ scale: 1.05, boxShadow: "0 8px 32px rgba(0,0,0,0.2)" }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
+              }}
               transition={{ duration: 0.3 }}
             >
               {/* Overlay Card with Glass Effect */}

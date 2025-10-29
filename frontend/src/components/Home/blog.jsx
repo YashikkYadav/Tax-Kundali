@@ -1,8 +1,14 @@
 import { FaCalendarAlt } from "react-icons/fa";
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import useScrollAnimation from "../../hooks/useScrollAnimation";
-import { fadeInUp, scaleIn, fadeIn, staggerContainer } from "../../lib/motionVariants";
+import {
+  fadeInUp,
+  scaleIn,
+  fadeIn,
+  staggerContainer,
+} from "../../lib/motionVariants";
 
 const blogs = [
   {
@@ -10,7 +16,7 @@ const blogs = [
     category: "Tax Planning",
     date: "September 13, 2025",
     title: "Tax Planning 101: Essential Steps to Take Before Year-End",
-    desc: " Don’t wait until the last minute! Discover key strategies for individuals and small businesses to optimize their tax position and maximize savings before the financial year ends.",
+    desc: " Don't wait until the last minute! Discover key strategies for individuals and small businesses to optimize their tax position and maximize savings before the financial year ends.",
     image: "/blog1.webp",
   },
   {
@@ -34,9 +40,10 @@ const blogs = [
 export default function BlogSection() {
   const sectionRef = useRef(null);
   const controls = useScrollAnimation(sectionRef);
+
   return (
     <motion.section
-      id='NewsAndBlogs'
+      id="NewsAndBlogs"
       ref={sectionRef}
       className="py-16 bg-white"
       initial="hidden"
@@ -45,54 +52,78 @@ export default function BlogSection() {
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Heading */}
-        <motion.div className="flex justify-between items-center mb-12 flex-wrap" variants={fadeInUp}>
+        <motion.div
+          className="flex justify-between items-center mb-12 flex-wrap"
+          variants={fadeInUp}
+        >
           <div>
-            <motion.p className="uppercase text-[#0089FF] font-semibold mb-2" variants={fadeInUp}>Blog & News</motion.p>
-            <motion.h2 className="text-4xl font-bold text-gray-900 leading-snug" variants={fadeInUp}>
-            Latest News&nbsp;and&nbsp;Blogs
+            <motion.p
+              className="uppercase text-[#0089FF] font-semibold mb-2"
+              variants={fadeInUp}
+            >
+              Blog & News
+            </motion.p>
+            <motion.h2
+              className="text-4xl font-bold text-gray-900 leading-snug"
+              variants={fadeInUp}
+            >
+              Latest News&nbsp;and&nbsp;Blogs
             </motion.h2>
           </div>
-          <motion.button className="px-6 py-3 bg-gradient-to-r from-[#0089FF] to-[#005FCC] text-white rounded-full shadow-lg hover:opacity-90 transition mt-6 md:mt-0" whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.96 }}>
-            View More
-          </motion.button>
+          <Link to="/blog">
+            <motion.button
+              className="px-6 py-3 bg-gradient-to-r from-[#0089FF] to-[#005FCC] text-white rounded-full shadow-lg hover:opacity-90 transition mt-6 md:mt-0"
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.96 }}
+            >
+              View More
+            </motion.button>
+          </Link>
         </motion.div>
 
         {/* Blog Cards */}
-        <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-8" variants={staggerContainer}>
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          variants={staggerContainer}
+        >
           {blogs.map((blog) => (
-            <motion.div
-              key={blog.id}
-              className="bg-blue-50 rounded-2xl overflow-hidden shadow-md"
-              variants={scaleIn}
-              whileHover={{ scale: 1.05, boxShadow: "0 8px 32px rgba(0,0,0,0.2)" }}
-              transition={{ duration: 0.3 }}
-            >
-              {/* Image */}
-              <div className="relative">
-                <motion.img
-                  src={blog.image}
-                  alt={blog.title}
-                  className="w-full h-53 object-cover"
-                  whileHover={{ scale: 1.05, rotate: 2 }}
-                  transition={{ duration: 0.3 }}
-                />
-                <span className="absolute top-4 left-4 bg-gradient-to-r from-[#0089FF] to-[#005FCC] text-white text-xs font-semibold px-3 py-1 rounded-full uppercase">
-                  {blog.category}
-                </span>
-              </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <div className="flex items-center text-sm text-gray-500 mb-3">
-                  <FaCalendarAlt className="mr-2 text-[#0089FF]" />
-                  {blog.date}
+            <Link to={`/blog/${blog.id}`} key={blog.id} className="block">
+              <motion.div
+                className="bg-blue-50 rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+                variants={scaleIn}
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Image */}
+                <div className="relative">
+                  <motion.img
+                    src={blog.image}
+                    alt={blog.title}
+                    className="w-full h-53 object-cover"
+                    whileHover={{ scale: 1.05, rotate: 2 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <span className="absolute top-4 left-4 bg-gradient-to-r from-[#0089FF] to-[#005FCC] text-white text-xs font-semibold px-3 py-1 rounded-full uppercase">
+                    {blog.category}
+                  </span>
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">
-                  {blog.title}
-                </h3>
-                <p className="text-gray-600 text-sm">{blog.desc}</p>
-              </div>
-            </motion.div>
+
+                {/* Content */}
+                <div className="p-6">
+                  <div className="flex items-center text-sm text-gray-500 mb-3">
+                    <FaCalendarAlt className="mr-2 text-[#0089FF]" />
+                    {blog.date}
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">
+                    {blog.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm">{blog.desc}</p>
+                </div>
+              </motion.div>
+            </Link>
           ))}
         </motion.div>
       </div>

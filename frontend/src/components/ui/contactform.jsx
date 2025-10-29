@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { fadeInLeft, fadeInUp, scaleIn, staggerContainer } from "../../lib/motionVariants";
+import {
+  fadeInLeft,
+  fadeInUp,
+  scaleIn,
+  staggerContainer,
+} from "../../lib/motionVariants";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -38,11 +43,31 @@ const ContactForm = () => {
     return Object.keys(tempErrors).length === 0;
   };
 
-  // Submit Handler
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      alert("Form submitted successfully!");
+      const { name, phone, email, subject, message } = formData;
+
+      // Format the WhatsApp message
+      const text = `New Contact Form Submission:
+
+Name: ${name}
+Phone: ${phone}
+Email: ${email}
+Subject: ${subject}
+Message: ${message}`;
+
+      // ✅ Encode message for URL
+      const encodedText = encodeURIComponent(text);
+
+      // WhatsApp number (with country code)
+      const whatsappNumber = "+919828107380";
+
+      // ✅ Use encodedText instead of text
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedText}`;
+      window.open(whatsappUrl, "_blank");
+
+      // Reset form after sending
       setFormData({ name: "", phone: "", email: "", subject: "", message: "" });
     }
   };
@@ -68,7 +93,10 @@ const ContactForm = () => {
 
       {/* Right Side - Form */}
       <motion.div className="md:w-1/2" variants={fadeInUp}>
-        <motion.h2 className="text-3xl font-bold mb-6 text-[#0089FF]" variants={fadeInUp}>
+        <motion.h2
+          className="text-3xl font-bold mb-6 text-[#0089FF]"
+          variants={fadeInUp}
+        >
           Send a Message
         </motion.h2>
         <motion.form
@@ -89,11 +117,16 @@ const ContactForm = () => {
               onChange={handleChange}
               className="w-full p-3 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0089FF]"
             />
-            {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+            {errors.name && (
+              <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+            )}
           </motion.div>
 
           {/* Phone + Email */}
-          <motion.div className="flex flex-col md:flex-row gap-4" variants={staggerContainer}>
+          <motion.div
+            className="flex flex-col md:flex-row gap-4"
+            variants={staggerContainer}
+          >
             <motion.div className="flex-1" variants={fadeInUp}>
               <input
                 type="text"
@@ -103,7 +136,9 @@ const ContactForm = () => {
                 onChange={handleChange}
                 className="w-full p-3 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0089FF]"
               />
-              {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+              {errors.phone && (
+                <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+              )}
             </motion.div>
 
             <motion.div className="flex-1" variants={fadeInUp}>
@@ -115,7 +150,9 @@ const ContactForm = () => {
                 onChange={handleChange}
                 className="w-full p-3 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0089FF]"
               />
-              {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+              )}
             </motion.div>
           </motion.div>
 
@@ -129,7 +166,9 @@ const ContactForm = () => {
               onChange={handleChange}
               className="w-full p-3 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0089FF]"
             />
-            {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
+            {errors.subject && (
+              <p className="text-red-500 text-sm mt-1">{errors.subject}</p>
+            )}
           </motion.div>
 
           {/* Message */}
@@ -142,7 +181,9 @@ const ContactForm = () => {
               onChange={handleChange}
               className="w-full p-3 bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0089FF]"
             ></textarea>
-            {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
+            {errors.message && (
+              <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+            )}
           </motion.div>
 
           {/* Submit Button */}

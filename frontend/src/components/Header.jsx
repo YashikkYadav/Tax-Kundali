@@ -1,11 +1,14 @@
-
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX, FiChevronDown } from "react-icons/fi";
 
 const headerVariants = {
   hidden: { opacity: 0, y: -40 },
-  show: { opacity: 1, y: 0, transition: { duration: 1.1, ease: [0.23, 1, 0.32, 1] } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1.1, ease: [0.23, 1, 0.32, 1] },
+  },
 };
 const navStagger = {
   hidden: {},
@@ -17,7 +20,11 @@ const navItem = {
 };
 const mobileMenuVariants = {
   hidden: { opacity: 0, y: -30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.9, staggerChildren: 0.15 } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.9, staggerChildren: 0.15 },
+  },
   exit: { opacity: 0, y: -30, transition: { duration: 0.5 } },
 };
 
@@ -34,27 +41,43 @@ const Header = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-2">
         {/* Logo */}
         <motion.div className="flex items-center space-x-2" variants={navItem}>
-          <img src="/logo.png" className="h-17 w-17" alt="Logo" />
+          <img src="/ca.png" className=" w-[160px] pl-10" alt="Logo" />
         </motion.div>
 
         {/* Desktop Nav */}
         <motion.nav
-          className="hidden  md:flex space-x-8 text-gray-700 font-medium relative"
+          className="hidden  md:flex space-x-8 text-gray-700 font-thin relative"
           variants={navStagger}
           initial="hidden"
           animate="show"
         >
           <motion.div variants={navItem}>
-            <a href="/" className="hover:text-[#0089FF] transition">Home</a>
+            <a href="/" className="hover:text-[#0089FF] transition">
+              Home
+            </a>
           </motion.div>
           <motion.div variants={navItem}>
-            <a href="/about" className="hover:text-[#0089FF] transition">About</a>
+            <a href="/about" className="hover:text-[#0089FF] transition">
+              About
+            </a>
           </motion.div>
           <motion.div variants={navItem}>
-            <a href="/services" className="block hover:text-[#0089FF] transition">Services</a>
+            <a
+              href="/services"
+              className="block hover:text-[#0089FF] transition"
+            >
+              Services
+            </a>
           </motion.div>
           <motion.div variants={navItem}>
-            <a href="/contact" className="hover:text-[#0089FF] transition">Contact</a>
+            <a href="/contact" className="hover:text-[#0089FF] transition">
+              Contact
+            </a>
+          </motion.div>
+          <motion.div variants={navItem}>
+            <a href="/blog" className="hover:text-[#0089FF] transition">
+              Blog
+            </a>
           </motion.div>
         </motion.nav>
 
@@ -80,16 +103,27 @@ const Header = () => {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            className="md:hidden bg-white shadow-md px-6 py-4 space-y-4 text-gray-700 font-medium"
+            className="md:hidden bg-white shadow-md px-6 py-4 space-y-4 text-gray-700 font-thin"
             variants={mobileMenuVariants}
             initial="hidden"
             animate="show"
             exit="exit"
           >
-            <a href="/" className="block hover:text-[#0089FF]">Home</a>
-            <a href="/about" className="block hover:text-[#0089FF]">About</a>
-            <a href="/services" className="block hover:text-[#0089FF]">Services</a>
-            <a href="/contact" className="block hover:text-[#0089FF]">Contact</a>
+            <a href="/" className="block hover:text-[#0089FF]">
+              Home
+            </a>
+            <a href="/about" className="block hover:text-[#0089FF]">
+              About
+            </a>
+            <a href="/services" className="block hover:text-[#0089FF]">
+              Services
+            </a>
+            <a href="/contact" className="block hover:text-[#0089FF]">
+              Contact
+            </a>
+            <a href="/blog" className="block hover:text-[#0089FF]">
+              Blog
+            </a>
             {/* <a
               href="#"
               className="block px-5 py-2 bg-gradient-to-r from-[#0089FF] to-[#005FCC] text-white rounded-full 
